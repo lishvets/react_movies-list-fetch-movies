@@ -55,7 +55,7 @@ export const FindMovie: React.FC<{
     setFoundMovie(null);
 
     try {
-      const response = await getMovie(title);
+      const response = await getMovie(title.trim());
 
       if ('Response' in response && response.Response === 'False') {
         setError(response.Error || 'Movie not found');
@@ -121,7 +121,6 @@ export const FindMovie: React.FC<{
                 type="button"
                 className="button is-primary"
                 onClick={handleAddMovie}
-                disabled={!foundMovie}
               >
                 Add to the list
               </button>
@@ -133,7 +132,7 @@ export const FindMovie: React.FC<{
       {foundMovie && (
         <div className="container" data-cy="previewContainer">
           <h2 className="title">Preview</h2>
-          {foundMovie && <MovieCard movie={foundMovie} />}
+          <MovieCard movie={foundMovie} />
         </div>
       )}
     </>
